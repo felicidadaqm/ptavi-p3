@@ -3,6 +3,7 @@
 
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
+from collections import OrderedDict
 
 class smallSMILHandler(ContentHandler):
 
@@ -16,6 +17,7 @@ class smallSMILHandler(ContentHandler):
                     'textstream': ['src', 'region']}
 
     def startElement(self, name, attrs):
+        dicc = OrderedDict()
         dicc = {}
         if name in self.tag_dicc:
             dicc['tag'] = name
@@ -31,5 +33,5 @@ if __name__ == "__main__":
     parser = make_parser()
     cHandler = smallSMILHandler()
     parser.setContentHandler(cHandler)
-    parser.parse(open('karaoke.smil'))
+    parser.parse(open())
     print(cHandler.get_tags())
