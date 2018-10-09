@@ -18,7 +18,6 @@ class smallSMILHandler(ContentHandler):
 
     def startElement(self, name, attrs):
         dicc = OrderedDict()
-        dicc = {}
         if name in self.tag_dicc:
             dicc['tag'] = name
             for attribute in self.tag_dicc[name]:
@@ -33,5 +32,5 @@ if __name__ == "__main__":
     parser = make_parser()
     cHandler = smallSMILHandler()
     parser.setContentHandler(cHandler)
-    parser.parse(open())
+    parser.parse(open('karaoke.smil'))
     print(cHandler.get_tags())
