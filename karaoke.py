@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from xml.sax import make_parser
-from xml.sax.handler import ContentHandler
 import smallsmilhandler
 import sys
 from collections import OrderedDict
 import json
+from urllib.request import urlretrieve
 
 class Print (smallsmilhandler.smallSMILHandler):
 
@@ -25,6 +25,13 @@ class Print (smallsmilhandler.smallSMILHandler):
             letters = json.dumps(self.tag)
             print(letters)
 
+    def download(self):
+        for dicc in self.tag:
+            if 'src' in dicc and 'http://' in dicc['src']:
+                print(dicc['src'])
+                urlretrieve(dicc['src'])
+                print("meh")
+
 if __name__ == "__main__":
 
     parser = make_parser()
@@ -38,6 +45,6 @@ if __name__ == "__main__":
     except (FileNotFoundError, IndexError):
         sys.exit("Usage: python3 karaoke.py file.smil")
 
- #   print(cHandler.get_tags())
     cHandler.print_line()
     cHandler.print_json()
+    cHandler.download()
