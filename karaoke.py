@@ -7,6 +7,7 @@ import sys
 from collections import OrderedDict
 import json
 from urllib.request import urlretrieve
+import urllib
 
 class Print (smallsmilhandler.smallSMILHandler):
 
@@ -28,9 +29,11 @@ class Print (smallsmilhandler.smallSMILHandler):
     def download(self):
         for dicc in self.tag:
             if 'src' in dicc and 'http://' in dicc['src']:
-                print(dicc['src'])
-                urlretrieve(dicc['src'])
-                print("meh")
+                url = dicc['src']
+                name= url[url.rfind('/')+1:]
+                print(name)
+                print(url)
+                urlretrieve(dicc['src'], filename=name) 
 
 if __name__ == "__main__":
 
