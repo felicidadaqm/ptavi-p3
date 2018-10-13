@@ -5,6 +5,7 @@ from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 from collections import OrderedDict
 
+
 class smallSMILHandler(ContentHandler):
 
     def __init__(self):

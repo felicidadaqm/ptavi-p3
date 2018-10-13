@@ -10,7 +10,7 @@ import json
 
 class KaraokeLocal():
 
-    def __init__(self):     #Initialize the program
+    def __init__(self):     # Initialize the program
         parser = make_parser()
         cHandler = smallsmilhandler.smallSMILHandler()
         parser.setContentHandler(cHandler)
@@ -19,8 +19,7 @@ class KaraokeLocal():
         file = sys.argv[1]
         parser.parse(open(file))
 
-
-    def __str__(self):      #Prints tags in order, except the empty ones
+    def __str__(self):      # Prints tags in order, except the empty ones
         exit = ""
         for dicc in self.tag:
             exit += str("\n" + dicc['tag'] + "\t")
@@ -29,20 +28,19 @@ class KaraokeLocal():
                     exit += str(key + "=\"" + dicc[key] + "\"\t")
         return exit
 
-    def do_json(self, json_name=''): #Creates a json file
+    def do_json(self, json_name=''):    # Creates a json file
         file = sys.argv[1]
         if json_name == '':
             json_name = file.replace('.smil', '.json')
         with open(json_name, 'w') as json_file:
             json.dump(self.tag, json_file)
-        
 
-    def do_local(self):     #Downloads remote multimedia content
+    def do_local(self):     # Downloads remote multimedia content
         for dicc in self.tag:
             if 'src' in dicc and 'http://' in dicc['src']:
                 url = dicc['src']
-                name= url[url.rfind('/')+1:]
-                urlretrieve(dicc['src'], filename=name) 
+                name = url[url.rfind('/')+1:]
+                urlretrieve(dicc['src'], filename=name)
 
 if __name__ == "__main__":
 
