@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from xml.sax import make_parser
+from urllib.request import urlretrieve
 import smallsmilhandler
 import sys
-from collections import OrderedDict
 import json
-from urllib.request import urlretrieve
+
 
 class KaraokeLocal():
 
@@ -35,9 +35,6 @@ class KaraokeLocal():
             json_name = file.replace('.smil', '.json')
         with open(json_name, 'w') as json_file:
             json.dump(self.tag, json_file)
-            letters = json.dumps(self.tag)
-            print(letters)
-            print("_________________________")
         
 
     def do_local(self):     #Downloads remote multimedia content
@@ -45,9 +42,6 @@ class KaraokeLocal():
             if 'src' in dicc and 'http://' in dicc['src']:
                 url = dicc['src']
                 name= url[url.rfind('/')+1:]
-                print(name)
-                print(url)
-                print("_________________________")
                 urlretrieve(dicc['src'], filename=name) 
 
 if __name__ == "__main__":
@@ -58,7 +52,6 @@ if __name__ == "__main__":
         sys.exit("Usage: python3 karaoke.py file.smil")
 
     print(karaoke)
-    print("_________________________")
     karaoke.do_json()
     karaoke.do_local()
     karaoke.do_json('local.json')
