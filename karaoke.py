@@ -8,7 +8,7 @@ import sys
 import json
 
 
-class KaraokeLocal():
+class KaraokeLocal:
 
     def __init__(self):     # Initialize the program
         parser = make_parser()
@@ -41,6 +41,7 @@ class KaraokeLocal():
                 url = dicc['src']
                 name = url[url.rfind('/')+1:]
                 urlretrieve(dicc['src'], filename=name)
+
 
 if __name__ == "__main__":
 
